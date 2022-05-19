@@ -133,12 +133,16 @@ function filterTask(e) {
 function sortTasks(e) {
     if(e.target.value == "Alphabetic") {
         sortByAlphabets();
+        displaySortedTasks();
     } else if(e.target.value == "Date") {
         sortByDate();
+        displaySortedTasks();
     } else if(e.target.value == "Priority") {
         sortByPriority();
+        displaySortedTasks();
     } else if(e.target.value == "Category") {
         sortByCategory();
+        displaySortedTasks();
     }
 }
 
@@ -156,15 +160,6 @@ function sortByAlphabets() {
             }
         });
     });
-
-    while(taskContainer.children[2]) {
-        taskContainer.removeChild(taskContainer.children[2]);
-    }
-
-    taskList = tempList;
-    tempList = [];
-    sortingList = [];
-    initTasks();
 }
 
 // Sort Date 
@@ -172,29 +167,20 @@ function sortByDate() {
     taskList.forEach(function(task) {
         sortingList.push(Date.parse(task.date));
     });
-
-    sortingList.sort();
-    sortingList.forEach(function(dateValue) {
+    console.log(sortingList);
+    sortingList.sort((a, b) => a - b);
+    console.log(sortingList);
+    sortingList.forEach(function(date) {
         taskList.forEach(function(task) {
-            if(dateValue == Date.parse(task.date)) {
+            if(date == Date.parse(task.date)) {
                 tempList.push(task);
             }
         });
     });
-
-    while(taskContainer.children[2]) {
-        taskContainer.removeChild(taskContainer.children[2]);
-    }
-
-    taskList = tempList;
-    tempList = [];
-    sortingList = [];
-    initTasks();
 }
 
 // Sort Priority 
 function sortByPriority() {
-
     // Sorting High priority tasks
     taskList.forEach(function(task) {
         if(task.priority == "High") {
@@ -213,19 +199,10 @@ function sortByPriority() {
             tempList.push(task);
         }
     });
-
-    while(taskContainer.children[2]) {
-        taskContainer.removeChild(taskContainer.children[2]);
-    }
-
-    taskList = tempList;
-    tempList = [];
-    initTasks();
 }
 
 // Sort Category 
 function sortByCategory() {
-
     // Sorting Work category tasks
     taskList.forEach(function(task) {
         if(task.category == "Work") {
@@ -262,15 +239,19 @@ function sortByCategory() {
             tempList.push(task);
         }
     });
-    
+}
 
+// Rearrange tasks by sort option and update localStorage
+function displaySortedTasks() {
     while(taskContainer.children[2]) {
         taskContainer.removeChild(taskContainer.children[2]);
     }
 
     taskList = tempList;
     tempList = [];
+    sortingList = [];
     initTasks();
+    localStorage.setItem("tasks",JSON.stringify(taskList));
 }
 
 // Create task box
