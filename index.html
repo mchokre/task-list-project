@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Task List</title>
+</head>
+<body>    
+    <main>
+        <div class="left-menu">
+            <div class="task-button">
+                <h5>Add task</h5>
+            </div>
+            <form class="task-form">
+                <input type="text" value="Title" onfocus="this.value=''" required/>
+                <input type="text" value="YYYY-MM-DD" onfocus="this.value=''" required/>
+                <select name="Type" required>
+                    <option selected disabled hidden>Category</option>
+                    <option>Work</option>
+                    <option>School</option>
+                    <option>Grocery</option>
+                    <option>Familly</option>
+                    <option>Friends</option>
+                    <option>Pet</option>
+                </select>
+                <select name="Priority" required>
+                    <option selected disabled hidden>Priority</option>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                </select>
+                <button type="submit">Append</button>
+            </form>
+        </div>
+        <div class="task-container">
+            <menu class="top-menu">
+                <select name="Sorting" required>
+                    <option selected disabled hidden>Sorted by date</option>
+                    <option>Alphabetic</option>
+                    <option>Date</option>
+                    <option>Priority</option>
+                    <option>Category</option>
+                </select>
+                <input type="text" value="Search task" onfocus="this.value=''" onfocusout="this.value='Search task'"/>
+                <button class="clear-task-btn">Clear</button>
+            </menu>
+            <h5>Empty list</h5>
+        </div>
+    </main>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
